@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:kararverio/app/ui/theme/text_theme.dart';
 import 'package:kararverio/app/ui/utils/constants/app_colors.dart';
@@ -18,9 +20,9 @@ class HomePage extends GetView<HomeController> {
     return MainLayoutView(
       child: GestureDetector(
         onTap: () {
-          _controller.selected.add(
-            Fortune.randomInt(0, _controller.data[0].length),
-          );
+          _controller.fortuneItemValue =
+              Fortune.randomInt(0, _controller.data[0].length);
+          _controller.selected.add(_controller.fortuneItemValue);
         },
         child: Column(
           children: [
@@ -32,7 +34,6 @@ class HomePage extends GetView<HomeController> {
               textScaleFactor: 0.5,
               style: ThemeTextStyle.headerText,
             ),
-            //   _controller.selected.reactive; lib/app/ui/pages/home_page/home_page.dart /home/abdullah/Genel/flutter_example/kararverio/lib/app/ui/pages/home_page/home_page.dart
             Expanded(
               child: FortuneWheel(
                 physics: CircularPanPhysics(
